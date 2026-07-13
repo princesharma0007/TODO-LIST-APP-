@@ -10,7 +10,7 @@ function saveTasks() {
     localStorage.setItem("tasks", JSON.stringify(tasks));
 }
 
- // Show all tasks
+// Show all tasks
 function showTasks() {
 
     list.innerHTML = "";
@@ -68,21 +68,61 @@ function showTasks() {
         };
 
         // Edit
-        task.querySelector(".editBtn").onclick = function () {
+task.querySelector(".editBtn").onclick = function () {
 
-            let newTitle = prompt("Edit title", item.title);
-            let newDesc = prompt("Edit description", item.desc);
+    Swal.fire({
+        title: "Edit Task",
+        html: `
+            <input id="editTitle" class="swal2-input" placeholder="Task Title" value="${item.title}">
+            <textarea id="editDesc" class="swal2-textarea" placeholder="Task Description">${item.desc}</textarea>
+        `,
+        icon: "info",
+        showCancelButton: true,
+        confirmButtonText: "Save",
+        cancelButtonText: "Cancel",
+        confirmButtonColor: "#2563eb",
+        cancelButtonColor: "#ef4444",
+        focusConfirm: false,
 
-            if (newTitle !== null && newDesc !== null) {
+        preConfirm: () => {
 
-                tasks[index].title = newTitle;
-                tasks[index].desc = newDesc;
+            let newTitle = document.getElementById("editTitle").value.trim();
+            let newDesc = document.getElementById("editDesc").value.trim();
 
-                saveTasks();
-                showTasks();
+            if (newTitle === "" || newDesc === "") {
+                Swal.showValidationMessage("Please fill all fields!");
+                return false;
             }
 
-        };
+            return {
+                title: newTitle,
+                desc: newDesc
+            };
+        }
+
+    }).then((result) => {
+
+        if (result.isConfirmed) {
+
+            tasks[index].title = result.value.title;
+            tasks[index].desc = result.value.desc;
+
+            saveTasks();
+            showTasks();
+
+            Swal.fire({
+                icon: "success",
+                title: "Task Updated!",
+                text: "Your task has been updated successfully.",
+                timer: 1500,
+                showConfirmButton: false
+            });
+
+        }
+
+    });
+
+};
 
         list.appendChild(task);
 
@@ -94,7 +134,13 @@ function showTasks() {
 btn.onclick = function () {
 
     if (title.value.trim() === "" || desc.value.trim() === "") {
-        alert("Fill all fields");
+    Swal.fire({
+    icon: "info",
+    title: "Almost There! 🚀",
+    text: "Don't forget to fill in both the Title and Description.",
+    confirmButtonText: "I'll do it",
+    confirmButtonColor: "#2563eb"
+});
         return;
     }
 
@@ -116,6 +162,6 @@ btn.onclick = function () {
     desc.value = "";
 
 };
- 
+
 // Load tasks on page refresh
 showTasks();
