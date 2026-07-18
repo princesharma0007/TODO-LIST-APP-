@@ -12,7 +12,7 @@ function saveTasks() {
 
 // Show all tasks 
 function showTasks() {
-
+ 
     list.innerHTML = "";
 
     tasks.forEach(function (item, index) {
