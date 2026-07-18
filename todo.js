@@ -10,7 +10,7 @@ function saveTasks() {
     localStorage.setItem("tasks", JSON.stringify(tasks));
 }
 
-// Show all tasks
+// Show all tasks 
 function showTasks() {
 
     list.innerHTML = "";
