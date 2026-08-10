@@ -4,7 +4,6 @@ let btn = document.getElementById("addBtn");
 let list = document.getElementById("list");
   
 let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-
 // Save to Local Storage
 function saveTasks() { 
     localStorage.setItem("tasks", JSON.stringify(tasks));
