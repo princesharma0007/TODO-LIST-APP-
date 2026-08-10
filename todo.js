@@ -1,6 +1,6 @@
 let title = document.getElementById("title");
 let desc = document.getElementById("desc");
-let btn = document.getElementById("addBtn");
+let btn = document.getElementById("addBtn"); 
 let list = document.getElementById("list"); 
  
 let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
