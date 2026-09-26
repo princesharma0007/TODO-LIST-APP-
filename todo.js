@@ -7,7 +7,7 @@ let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 
 // Save to Local Storage 
 function saveTasks() { 
-    localStorage.setItem("tasks", JSON.stringify(tasks));
+    localStorage.setItem("tasks", JSON.stringify(tasks)); 
 }
 // Show all tasks 
 function showTasks() {
